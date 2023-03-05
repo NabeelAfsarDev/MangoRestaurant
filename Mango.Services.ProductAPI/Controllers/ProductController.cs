@@ -6,12 +6,12 @@ namespace Mango.Services.ProductAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductAPIController : ControllerBase
+    public class ProductController : ControllerBase
     {
         protected ResponseDto _response;
         private IProductRepository _repo;
 
-        public ProductAPIController(IProductRepository repo)
+        public ProductController(IProductRepository repo)
         {
             _repo = repo;
             this._response = new ResponseDto();
