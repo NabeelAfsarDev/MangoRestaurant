@@ -23,5 +23,27 @@ namespace Mango.Web.Controllers
             }
             return View(list);
         }
+        public async Task<IActionResult> ProductCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProductCreate(ProductDto productDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(productDto);
+            }
+
+            List<ProductDto> list = new();
+            var response = await _productService.CreateProductAsync<ResponseDto>(productDto);
+            if (response != null && response.IsSucess)
+            {
+                return RedirectToAction(nameof(ProductIndex));
+            }
+            return View(productDto);
+        }
     }
 }
